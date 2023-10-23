@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Counter from "./components/Counter";
+import Greeting from "./components/Greeting";
+
+import "./App.css";
 
 function App() {
+
+  const [showCounter, setShowCounter] = useState(true);
+
+  const toggleCounter = () => {
+    setShowCounter(!showCounter);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Greeting />
+      <hr />
+      <p>Bilmiyorum ne haldayım, Reacti öğreniyorum gündüz gece...</p>
+      <button
+        onClick={toggleCounter}
+        className={"btn " + (!showCounter ? "show" : "hide")}
+      >
+        {showCounter ? "Hide" : "Show"} Counter
+      </button>
+      {showCounter && <Counter />}
     </div>
   );
 }
