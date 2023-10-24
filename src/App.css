@@ -1,15 +1,36 @@
-.show {
-  background-color: green;
-}
-
-.hide {
-  background-color: red;
-}
-
 .btn {
   color: white;
   border: none;
   border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgb(0, 81, 255);
+  border: 1px solid rgb(0, 67, 212);
+  cursor: pointer;
+  transition: 0.3s;
+  margin-right: 0.25rem;
+  background: linear-gradient(
+    0deg,
+    rgba(21, 21, 185, 1) 0%,
+    rgba(7, 138, 196, 1) 100%
+  );
+}
 
-  padding: 0.5rem 2rem;
+.btn:hover {
+  background-color: rgb(23, 97, 255);
+}
+
+.btn.green {
+  background-color: #03ae01;
+  border: 1px solid #029400;
+}
+.btn.green:hover {
+  background-color: #1db41a;
+}
+
+.container {
+  padding: 1rem;
+  margin: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
 }
