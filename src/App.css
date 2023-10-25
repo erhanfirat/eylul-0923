@@ -34,3 +34,20 @@
   border-radius: 0.5rem;
   box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
 }
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-list > div {
+  width: 20rem;
+  padding: 1rem;
+  margin: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.product-list > div > img {
+  max-width: 100%;
+}
