@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Col, Form, Row } from "react-bootstrap";
+
 import CounterDisplay from "./CounterDisplay";
 
 const Counter = ({ start = 0, name = "" }) => {
@@ -69,21 +71,30 @@ const Counter = ({ start = 0, name = "" }) => {
 
   return (
     <>
-      <label>
-        Yumurta Tane Fiyatı
-        <input
-          type="number"
-          onChange={(e) => setTaneFiyat(Number(e.target.value))}
-          value={taneFiyat}
-        />
-      </label>
-      <label>
-        <select onChange={(e) => setBoyut(e.target.value)} value={boyut}>
-          <option value={"sm"}>Küçük</option>
-          <option value={"md"}>Orta</option>
-          <option value={"lg"}>Büyük</option>
-        </select>
-      </label>
+      <Form.Group
+        as={Row}
+        className="mb-3"
+        controlId="exampleForm.ControlInput1"
+      >
+        <Form.Label column sm="2">
+          Yumurta Adet Fiyatı
+        </Form.Label>
+        <Col sm="4">
+          <Form.Control
+            type="number"
+            onChange={(e) => setTaneFiyat(Number(e.target.value))}
+            value={taneFiyat}
+          />
+        </Col>
+        <Col sm="6">
+          <Form.Select onChange={(e) => setBoyut(e.target.value)} value={boyut}>
+            <option value={"sm"}>Küçük</option>
+            <option value={"md"}>Orta</option>
+            <option value={"lg"}>Büyük</option>
+          </Form.Select>
+        </Col>
+      </Form.Group>
+
       <CounterDisplay
         name={name}
         counter={adet}

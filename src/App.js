@@ -1,12 +1,15 @@
 // External JS
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Button } from "react-bootstrap";
+
 // Internal JS
 import Counter, { PI, arr } from "./components/Counter";
 import Greeting from "./components/Greeting";
 import ProductsPage from "./pages/ProductsPage";
 // CSS
 import "./App.css";
+import Main from "./layout/Main";
 
 function App() {
   const [showCounter, setShowCounter] = useState(true);
@@ -30,21 +33,19 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <Greeting userName={user.name} language="tr" />
-      <hr />
-      <p>Bilmiyorum ne haldayım, Reacti öğreniyorum gündüz gece...</p>
-      <button
-        onClick={toggleCounter}
-        className={"btn " + (!showCounter ? "show" : "hide")}
-      >
-        {showCounter ? "Hide" : "Show"} Counter
-      </button>
-      {showCounter && <Counter name="bir" />}
-      {showCounter && <Counter name="iki" start={50} />}
-      {showCounter && <Counter name="üç" start={250} />}
-      <ProductsPage productList={productList} />
-    </div>
+    <Main productList={productList}  />
+    // <div>
+    //   <Greeting userName={user.name} language="tr" />
+    //   <hr />
+    //   <p>Bilmiyorum ne haldayım, Reacti öğreniyorum gündüz gece...</p>
+    //   <Button onClick={toggleCounter}>
+    //     {showCounter ? "Hide" : "Show"} Counter
+    //   </Button>
+    //   {showCounter && <Counter name="bir" />}
+    //   {showCounter && <Counter name="iki" start={50} />}
+    //   {showCounter && <Counter name="üç" start={250} />}
+    //   <ProductsPage productList={productList} />
+    // </div>
   );
 }
 

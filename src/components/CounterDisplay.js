@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import Button from "./Button";
 import Container from "./Container";
+import { Button } from "react-bootstrap";
 
 const CounterDisplay = ({
   name,
@@ -19,19 +19,19 @@ const CounterDisplay = ({
     <Container title={"Yumurta Sepeti " + name}>
       <h4>Adet: {counter}</h4>
       <h4>Fiyat: {fiyat}</h4>
-      <Button btnClick={sayacArttir}>
+      <Button onClick={sayacArttir} className="me-2">
         <i className="fa-solid fa-plus" />
         Arttır
       </Button>
-      <Button btnClick={sayacAzalt}>
+      <Button onClick={sayacAzalt} className="me-2">
         <i className="fa-solid fa-minus" />
         Azalt
       </Button>
-      <Button btnClick={sifirla}>
+      <Button onClick={sifirla} className="me-2">
         <i className="fa-solid fa-refresh" />
         Sıfırla
       </Button>
-      <Button btnClick={yuzVerdim}>100</Button>
+      <Button onClick={yuzVerdim}>100</Button>
     </Container>
   );
 };

@@ -16,7 +16,7 @@ const ProductsPage = ({ productList }) => {
           placeholder="Type to filter..."
         />
       </div>
-      <div className="product-list">
+      <div className="product-list gap-1">
         {productList
           ?.filter((product) => product.name.includes(filterText))
           ?.map((product) => (

@@ -1,4 +1,4 @@
-.btn {
+/* .btn {
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -25,7 +25,7 @@
 }
 .btn.green:hover {
   background-color: #1db41a;
-}
+} */
 
 .container {
   padding: 1rem;
@@ -41,9 +41,8 @@
 }
 
 .product-list > div {
-  width: 20rem;
+  width: 18rem;
   padding: 1rem;
-  margin: 1rem;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
 }
