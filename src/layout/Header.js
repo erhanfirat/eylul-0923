@@ -16,6 +16,10 @@ const Header = () => {
           <NavLink className="nav-link" to="/products">
             Ürünler
           </NavLink>
+          <NavLink className="nav-link" to="/create-product">
+            <i className="fa-solid fa-plus me-2" />
+            Ürün Oluştur
+          </NavLink>
           <NavLink className="nav-link" to="/about-us">
             Hakkımızda
           </NavLink>

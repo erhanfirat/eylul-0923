@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import ProductForm from "../components/ProductForm";
 
-const ProductDetail = ({ productList }) => {
-  const [product, setProduct] = useState();
+const EditProductPage = ({ productList, fetchProducts }) => {
+  const [product, setProduct] = useState({});
   const { productId } = useParams();
   const history = useHistory();
 
@@ -21,14 +22,12 @@ const ProductDetail = ({ productList }) => {
         >
           <i className="fa-solid fa-chevron-left" />
         </button>{" "}
-        Detail: {productId} - {product?.name}
+        Edit: {productId} - {product?.name}
       </h1>
       <hr />
-      <img src={product?.img} />
-      <p>{product?.description}</p>
-      <p>{product?.price}</p>
+      <ProductForm productData={product} fetchProducts={fetchProducts} />
     </div>
   );
 };
 
-export default ProductDetail;
+export default EditProductPage;

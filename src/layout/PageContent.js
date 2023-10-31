@@ -4,14 +4,17 @@ import ProductsPage from "../pages/ProductsPage";
 import HomePage from "../pages/HomePage";
 import AboutUsPage from "../pages/AboutUsPage";
 import ProductDetail from "../pages/ProductDetail";
+import CreateProductPage from "../pages/CreateProductPage";
+import EditProductPage from "../pages/EditProductPage";
 
-const PageContent = ({ productList }) => {
+const PageContent = ({ productList, fetchProducts }) => {
   return (
     <div>
       <Switch>
         <Route path="/about-us">
           <AboutUsPage />
         </Route>
+
         <Route path="/counter">
           <CounterPage />
         </Route>
@@ -22,6 +25,17 @@ const PageContent = ({ productList }) => {
         <Route path="/products/:productId" exact>
           <ProductDetail productList={productList} />
         </Route>
+        <Route path="/edit-product/:productId" exact>
+          <EditProductPage
+            productList={productList}
+            fetchProducts={fetchProducts}
+          />
+        </Route>
+
+        <Route path="/create-product" exact>
+          <CreateProductPage fetchProducts={fetchProducts} />
+        </Route>
+
         <Route path="/" exact>
           <HomePage />
         </Route>

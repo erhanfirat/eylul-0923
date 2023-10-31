@@ -20,33 +20,22 @@ function App() {
     setShowCounter(!showCounter);
   };
 
+  const fetchProducts = () => {
+    return axios
+      .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
+      .then((res) => {
+        setProductList(res.data);
+        return res.data;
+      });
+  };
+
   // component did mount
   // app loaded
   useEffect(() => {
-    console.warn("DİKKAT DİKKAT! UYGULAMA YÜKLENMİŞTİR!");
-    axios
-      .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
-      .then((res) => {
-        console.log("res data > ", res.data);
-        setProductList(res.data);
-      });
+    fetchProducts();
   }, []);
 
-  return (
-    <Main productList={productList}  />
-    // <div>
-    //   <Greeting userName={user.name} language="tr" />
-    //   <hr />
-    //   <p>Bilmiyorum ne haldayım, Reacti öğreniyorum gündüz gece...</p>
-    //   <Button onClick={toggleCounter}>
-    //     {showCounter ? "Hide" : "Show"} Counter
-    //   </Button>
-    //   {showCounter && <Counter name="bir" />}
-    //   {showCounter && <Counter name="iki" start={50} />}
-    //   {showCounter && <Counter name="üç" start={250} />}
-    //   <ProductsPage productList={productList} />
-    // </div>
-  );
+  return <Main productList={productList} fetchProducts={fetchProducts} />;
 }
 
 export default App;

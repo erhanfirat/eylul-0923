@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import PageContent from "./PageContent";
 import Footer from "./Footer";
 
-const Main = ({ productList }) => {
+const Main = ({ productList, fetchProducts }) => {
   return (
     <>
       <Header />
@@ -14,7 +14,10 @@ const Main = ({ productList }) => {
             <Sidebar />
           </Col>
           <Col lg="9" md="9" sm="12">
-            <PageContent productList={productList} />
+            <PageContent
+              productList={productList}
+              fetchProducts={fetchProducts}
+            />
           </Col>
         </Row>
         <Row>

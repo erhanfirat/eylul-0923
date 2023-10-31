@@ -11,6 +11,10 @@ const ProductCard = ({ product }) => {
         <i className="fa-solid fa-search me-2" />
         İncele
       </Link>
+      <Link className="btn btn-primary" to={`/edit-product/${product.id}`}>
+        <i className="fa-solid fa-pen me-2" />
+        Düzenle
+      </Link>
     </div>
   );
 };
