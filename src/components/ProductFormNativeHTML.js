@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import * as Yup from "yup";
 
 const productEmpty = {
   name: "",
@@ -314,107 +313,44 @@ const colorList = [
 
 const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
   const [product, setProduct] = useState(productData);
-  const [formErrors, setFormErrors] = useState({
-    name: "",
-    description: "",
-    img: "",
-    price: "",
-    active: "",
-    color: "",
-  });
-  const [formValid, setFormValid] = useState(true);
-
   const history = useHistory();
-
-  const productFormSchema = Yup.object().shape({
-    name: Yup.string()
-      .required("İsim alanı boş bırakılamaz!")
-      .min(3, "Ürün ismi 3 karakterden az olamaz."),
-    description: Yup.string().required("Açıklama alanı zorunludur."),
-    img: Yup.string()
-      .url("Lütfen geçerli bir URL adresi giriniz.")
-      .required("Lütfen ürün fotoğrafı ekleyiniz"),
-    price: Yup.number().positive("Fiyat bilgisi eksi değer alamaz."),
-    active: Yup.boolean(),
-    color: Yup.string().required("Lütfen renk seçiniz."),
-  });
 
   const formSubmit = (e) => {
     e.preventDefault();
-    for (let key in product) {
-      console.log(
-        "checkValidationFor(key, product[key]) > ",
-        key,
-        product[key]
-      );
-      checkValidationFor(key, product[key]);
-    }
+    console.log("FROM SUBMIT EDİLDİ! ", e);
 
-    if (formValid) {
-      console.log("FROM SUBMIT EDİLDİ! ", e);
+    //todo: eğer yeni ürünse post, güncelleme ise put req yap
+    const reqType = product.id ? "put" : "post";
+    const endpoint = `https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products${
+      reqType === "put" ? "/" + product.id : ""
+    }`;
 
-      //todo: eğer yeni ürünse post, güncelleme ise put req yap
-      const reqType = product.id ? "put" : "post";
-      const endpoint = `https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products${
-        reqType === "put" ? "/" + product.id : ""
-      }`;
-
-      axios[reqType](endpoint, product)
-        .then((res) => {
-          console.log("ürün başarıyla kaydedildi!");
-          fetchProducts().then(() => {
-            // fetch products bitti
-            history.push("/products");
-          });
-          // todo: redirect to products page
-        })
-        .catch((err) => {
-          console.error("Ürün kaydedilirken bir hata ile karşılaşıldı: ", err);
+    axios[reqType](endpoint, product)
+      .then((res) => {
+        console.log("ürün başarıyla kaydedildi!");
+        fetchProducts().then(() => {
+          // fetch products bitti
+          history.push("/products");
         });
-    }
+        // todo: redirect to products page
+      })
+      .catch((err) => {
+        console.error("Ürün kaydedilirken bir hata ile karşılaşıldı: ", err);
+      });
   };
 
   const inputChangeHandler = (e) => {
     const { name, value, type, checked } = e.target;
     setProduct({ ...product, [name]: type === "checkbox" ? checked : value });
-
-    checkValidationFor(name, type === "checkbox" ? checked : value);
-  };
-
-  const checkValidationFor = (field, value) => {
-    Yup.reach(productFormSchema, field)
-      .validate(value)
-      .then((valid) => {
-        setFormErrors({ ...formErrors, [field]: "" });
-      })
-      .catch((err) => {
-        console.log("HATA! ", field, err.errors[0]);
-
-        setFormErrors((prevFormErrors) => ({
-          ...prevFormErrors,
-          [field]: err.errors[0],
-        }));
-      });
-    /*
-    setFormErrors({ name: "", decription: "", img: "", price: "", name: "hata mesajı"});
-    setFormErrors({ name: "", decription: "", img: "", price: "", decription: "hata mesajı"});
-    setFormErrors({ name: "", decription: "", img: "", price: "", img: "hata mesajı"});
-    setFormErrors({ name: "", decription: "", img: "", price: "", price: "hata mesajı"});
-    */
   };
 
   useEffect(() => {
-    console.error("form error > ", formErrors);
-  }, [formErrors]);
+    console.log("product > ", product);
+  }, [product]);
 
   useEffect(() => {
     productData && setProduct(productData);
   }, [productData]);
-
-  useEffect(() => {
-    console.log("product > ", product);
-    productFormSchema.isValid(product).then((valid) => setFormValid(valid));
-  }, [product]);
 
   return (
     <Form onSubmit={formSubmit}>
@@ -426,11 +362,7 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
           onChange={inputChangeHandler}
           value={product.name}
           name="name"
-          isInvalid={!!formErrors.name}
         />
-        <Form.Control.Feedback type="invalid">
-          {formErrors.name}
-        </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label htmlFor="img">Fotoğraf</Form.Label>
@@ -440,11 +372,7 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
           onChange={inputChangeHandler}
           value={product.img}
           name="img"
-          isInvalid={!!formErrors.img}
         />
-        <Form.Control.Feedback type="invalid">
-          {formErrors.img}
-        </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label htmlFor="description">Açıklama</Form.Label>
@@ -454,11 +382,7 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
           onChange={inputChangeHandler}
           value={product.description}
           name="description"
-          isInvalid={!!formErrors.description}
         />
-        <Form.Control.Feedback type="invalid">
-          {formErrors.description}
-        </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label htmlFor="price">Fiyat</Form.Label>
@@ -468,11 +392,7 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
           onChange={inputChangeHandler}
           value={product.price}
           name="price"
-          isInvalid={!!formErrors.price}
         />
-        <Form.Control.Feedback type="invalid">
-          {formErrors.price}
-        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
@@ -481,20 +401,14 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
           name="color"
           value={product.color}
           onChange={inputChangeHandler}
-          isInvalid={!!formErrors.color}
         >
           <option value={""} default disabled>
             Lütfen renk değerini seçiniz
           </option>
           {colorList.map((color) => (
-            <option key={color} value={color.toLowerCase()}>
-              {color}
-            </option>
+            <option value={color.toLowerCase()}>{color}</option>
           ))}
         </Form.Select>
-        <Form.Control.Feedback type="invalid">
-          {formErrors.color}
-        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
