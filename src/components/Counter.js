@@ -87,7 +87,11 @@ const Counter = ({ start = 0, name = "" }) => {
           />
         </Col>
         <Col sm="6">
-          <Form.Select onChange={(e) => setBoyut(e.target.value)} value={boyut}>
+          <Form.Select
+            onChange={(e) => setBoyut(e.target.value)}
+            value={boyut}
+            data-cy="yumurta-ebat-select"
+          >
             <option value={"sm"}>Küçük</option>
             <option value={"md"}>Orta</option>
             <option value={"lg"}>Büyük</option>

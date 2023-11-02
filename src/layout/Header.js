@@ -10,13 +10,17 @@ const Header = () => {
           <NavLink className="nav-link" to="/" exact>
             Ana Sayfa
           </NavLink>
-          <NavLink className="nav-link" to="/counter">
+          <NavLink id="yumura-sepeti-link" className="nav-link" to="/counter">
             Yumurta Sepeti
           </NavLink>
           <NavLink className="nav-link" to="/products">
             Ürünler
           </NavLink>
-          <NavLink className="nav-link" to="/create-product">
+          <NavLink
+            id="yeni-urun-link"
+            className="nav-link"
+            to="/create-product"
+          >
             <i className="fa-solid fa-plus me-2" />
             Ürün Oluştur
           </NavLink>

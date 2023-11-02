@@ -403,6 +403,9 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
     */
   };
 
+  // ESLint - Ecma Script Lint
+  // const func = () => {{{{{}
+
   useEffect(() => {
     console.error("form error > ", formErrors);
   }, [formErrors]);
@@ -421,14 +424,14 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
       <Form.Group className="mb-3">
         <Form.Label htmlFor="name">Ürün adı</Form.Label>
         <Form.Control
-          id="name"
+          id="name-input"
           type="text"
           onChange={inputChangeHandler}
           value={product.name}
           name="name"
           isInvalid={!!formErrors.name}
         />
-        <Form.Control.Feedback type="invalid">
+        <Form.Control.Feedback id="name-validation" type="invalid">
           {formErrors.name}
         </Form.Control.Feedback>
       </Form.Group>

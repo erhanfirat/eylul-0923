@@ -18,8 +18,10 @@ const CounterDisplay = ({
   return (
     <Container title={"Yumurta Sepeti " + name}>
       <h4>Adet: {counter}</h4>
-      <h4>Fiyat: {fiyat}</h4>
-      <Button onClick={sayacArttir} className="me-2">
+      <h4>
+        Fiyat: <span id="fiyat-span">{fiyat}</span>
+      </h4>
+      <Button onClick={sayacArttir} className="me-2" id="yumurta-arttir-btn">
         <i className="fa-solid fa-plus" />
         Arttır
       </Button>
@@ -31,7 +33,9 @@ const CounterDisplay = ({
         <i className="fa-solid fa-refresh" />
         Sıfırla
       </Button>
-      <Button onClick={yuzVerdim}>100</Button>
+      <Button onClick={yuzVerdim} id="yumuta-100-btn">
+        100
+      </Button>
     </Container>
   );
 };
