@@ -3,6 +3,8 @@ import { Col, Form, Row } from "react-bootstrap";
 
 import CounterDisplay from "./CounterDisplay";
 
+let adet2 = 0;
+
 const Counter = ({ start = 0, name = "" }) => {
   const [adet, setAdet] = useState(start);
   const [taneFiyat, setTaneFiyat] = useState(15);
@@ -10,21 +12,23 @@ const Counter = ({ start = 0, name = "" }) => {
   const [boyut, setBoyut] = useState("sm"); // sm, md, lg
 
   const sayacArttir = () => {
-    // adet 10
     setAdet(adet + 1);
-    // adet 10
+    console.log("sayacArttir > adet: ", adet);
   };
 
   const sayacAzalt = () => {
     setAdet(adet - 1);
+    adet2--;
   };
 
   const sifirla = () => {
     setAdet(0);
+    adet2 = 0;
   };
 
   const yuzVerdim = () => {
     setAdet(100);
+    adet2 = 100;
   };
 
   useEffect(() => {
@@ -71,6 +75,7 @@ const Counter = ({ start = 0, name = "" }) => {
 
   return (
     <>
+      <h3>Adet2: {adet2}</h3>
       <Form.Group
         as={Row}
         className="mb-3"

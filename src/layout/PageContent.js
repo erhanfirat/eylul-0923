@@ -6,8 +6,9 @@ import AboutUsPage from "../pages/AboutUsPage";
 import ProductDetail from "../pages/ProductDetail";
 import CreateProductPage from "../pages/CreateProductPage";
 import EditProductPage from "../pages/EditProductPage";
+import SiparisPage from "../pages/SiparisPage";
 
-const PageContent = ({ productList, fetchProducts }) => {
+const PageContent = ({ productList, fetchProducts, setSiparisFormData }) => {
   return (
     <div>
       <Switch>
@@ -22,7 +23,7 @@ const PageContent = ({ productList, fetchProducts }) => {
         <Route path="/products" exact>
           <ProductsPage productList={productList} />
         </Route>
-        <Route path="/products/:productId" exact>
+        <Route path="/products/:productId/:productName" exact>
           <ProductDetail productList={productList} />
         </Route>
         <Route path="/edit-product/:productId" exact>
@@ -38,6 +39,7 @@ const PageContent = ({ productList, fetchProducts }) => {
 
         <Route path="/" exact>
           <HomePage />
+          <SiparisPage setSiparisFormData={setSiparisFormData} />
         </Route>
         <Route path="*">
           <h1>404 - Meşhur Not Found Hatası</h1>

@@ -50,3 +50,9 @@
 .product-list > div > img {
   max-width: 100%;
 }
+
+.ziyaretci-card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}

@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 const ProductDetail = ({ productList }) => {
   const [product, setProduct] = useState();
-  const { productId } = useParams();
+  const { productId, productName } = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const ProductDetail = ({ productList }) => {
         >
           <i className="fa-solid fa-chevron-left" />
         </button>{" "}
-        Detail: {productId} - {product?.name}
+        Detail: {productId}/{productName} - {product?.name}
       </h1>
       <hr />
       <img src={product?.img} />

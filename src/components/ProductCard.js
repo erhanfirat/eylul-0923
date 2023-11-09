@@ -7,7 +7,12 @@ const ProductCard = ({ product }) => {
       <h3>{product.name}</h3>
       <p>{product.description}</p>
       <p className="price">{product.price}</p>
-      <Link className="btn btn-primary" to={`/products/${product.id}`}>
+      <Link
+        className="btn btn-primary"
+        to={`/products/${product.id}/${product.name
+          .replaceAll(" ", "-")
+          .toLowerCase()}`}
+      >
         <i className="fa-solid fa-search me-2" />
         İncele
       </Link>

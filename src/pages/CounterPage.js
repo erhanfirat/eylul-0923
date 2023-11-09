@@ -1,9 +1,10 @@
-import Counter from "../components/Counter";
+import Counter, { PI, arr } from "../components/Counter";
 
 const CounterPage = () => {
+  console.log("arr > ", arr);
   return (
     <div>
-      <h1>Counter Page</h1>
+      <h1>Counter Page - {PI}</h1>
       <hr />
       <Counter />
     </div>
