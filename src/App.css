@@ -56,3 +56,9 @@
   border: 1px solid #ccc;
   border-radius: 0.5rem;
 }
+
+.validation-error {
+  color: red;
+  font-size: 0.75rem;
+  padding: 0 0 0.5rem 0;
+}

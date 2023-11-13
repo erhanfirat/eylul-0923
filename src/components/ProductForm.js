@@ -430,6 +430,7 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
           value={product.name}
           name="name"
           isInvalid={!!formErrors.name}
+          
         />
         <Form.Control.Feedback id="name-validation" type="invalid">
           {formErrors.name}
