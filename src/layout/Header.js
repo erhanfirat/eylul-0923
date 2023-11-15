@@ -27,6 +27,9 @@ const Header = () => {
           <NavLink className="nav-link" to="/about-us">
             Hakkımızda
           </NavLink>
+          <NavLink className="nav-link" to="/login">
+            Giriş
+          </NavLink>
         </Nav>
       </Container>
     </Navbar>

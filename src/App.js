@@ -9,11 +9,29 @@ import { Flip, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Main from "./layout/Main";
+import { Button } from "react-bootstrap";
+import useLocalStorage from "./hooks/useLocalStorage";
+
+const languages = [
+  { name: "Türkçe", value: "tr" },
+  { name: "English", value: "en" },
+  { name: "Japaneese", value: "jp" },
+  { name: "Kore", value: "co" },
+];
+
+const browserLang = Intl.DateTimeFormat().resolvedOptions().locale;
+const selectedLang = languages.find((l) => browserLang.includes(l.value));
+const initialLanguage = selectedLang ? selectedLang.value : "co";
 
 function App() {
   const [showCounter, setShowCounter] = useState(true);
-  const [user, setUser] = useState({ name: "Anonim", email: "" });
+  const [user, setUser] = useLocalStorage("user", {
+    name: "Anonim",
+    email: "",
+  });
   const [productList, setProductList] = useState();
+
+  const [language, setLanguage] = useLocalStorage("language", initialLanguage);
 
   const toggleCounter = () => {
     setShowCounter(!showCounter);
@@ -31,12 +49,37 @@ function App() {
   // component did mount
   // app loaded
   useEffect(() => {
-    toast.success("Uygulama başarıyla yüklendi!" );
+    toast.success("Uygulama başarıyla yüklendi!");
     fetchProducts();
   }, []);
 
   return (
     <>
+      <Button
+        onClick={() => {
+          setUser({ name: "ali", email: "ali@ali.com" });
+        }}
+      >
+        Set User
+      </Button>
+      <Button
+        onClick={() => {
+          console.log("user > ", user);
+        }}
+      >
+        Log User
+      </Button>
+      {language} |
+      <select
+        value={language}
+        onChange={(e) => {
+          setLanguage(e.target.value);
+        }}
+      >
+        {languages.map((lang) => (
+          <option value={lang.value}>{lang.name}</option>
+        ))}
+      </select>
       <Main productList={productList} fetchProducts={fetchProducts} />;
       <ToastContainer
         position="bottom-center"

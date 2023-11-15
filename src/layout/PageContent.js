@@ -7,6 +7,7 @@ import ProductDetail from "../pages/ProductDetail";
 import CreateProductPage from "../pages/CreateProductPage";
 import EditProductPage from "../pages/EditProductPage";
 import SiparisPage from "../pages/SiparisPage";
+import LoginPage from "../pages/LoginPage";
 
 const PageContent = ({ productList, fetchProducts, setSiparisFormData }) => {
   return (
@@ -35,6 +36,10 @@ const PageContent = ({ productList, fetchProducts, setSiparisFormData }) => {
 
         <Route path="/create-product" exact>
           <CreateProductPage fetchProducts={fetchProducts} />
+        </Route>
+
+        <Route path="/login" exact>
+          <LoginPage />
         </Route>
 
         <Route path="/" exact>

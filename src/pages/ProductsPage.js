@@ -1,8 +1,9 @@
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
+import useInput from "../hooks/useInput";
 
 const ProductsPage = ({ productList }) => {
-  const [filterText, setFilterText] = useState("");
+  const [filterText, filterChangeHandler] = useInput();
 
   return (
     <div>
@@ -11,7 +12,7 @@ const ProductsPage = ({ productList }) => {
       <div>
         <input
           type="text"
-          onChange={(e) => setFilterText(e.target.value)}
+          onChange={filterChangeHandler}
           value={filterText}
           placeholder="Type to filter..."
         />
