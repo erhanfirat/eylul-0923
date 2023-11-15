@@ -23,12 +23,20 @@ const browserLang = Intl.DateTimeFormat().resolvedOptions().locale;
 const selectedLang = languages.find((l) => browserLang.includes(l.value));
 const initialLanguage = selectedLang ? selectedLang.value : "co";
 
+const themeInitial = window.matchMedia("(prefers-color-scheme: dark)").matches
+  ? "dark"
+  : "light";
+
 function App() {
   const [showCounter, setShowCounter] = useState(true);
   const [user, setUser] = useLocalStorage("user", {
     name: "Anonim",
     email: "",
   });
+  const [theme, setTheme] = useLocalStorage(
+    "theme",
+    themeInitial ? themeInitial : "light"
+  );
   const [productList, setProductList] = useState();
 
   const [language, setLanguage] = useLocalStorage("language", initialLanguage);
@@ -79,6 +87,15 @@ function App() {
         {languages.map((lang) => (
           <option value={lang.value}>{lang.name}</option>
         ))}
+      </select>
+      <select
+        value={theme}
+        onChange={(e) => {
+          setTheme(e.target.value);
+        }}
+      >
+        <option value={"dark"}>{"Dark"}</option>
+        <option value={"light"}>{"Light"}</option>
       </select>
       <Main productList={productList} fetchProducts={fetchProducts} />;
       <ToastContainer
