@@ -21,7 +21,7 @@ const ProductsPage = ({ productList }) => {
         {productList
           ?.filter((product) => product.name.includes(filterText))
           ?.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard key={product.id} product={product} />
           ))}
       </div>
     </div>

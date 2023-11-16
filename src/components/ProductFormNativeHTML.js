@@ -406,7 +406,9 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
             Lütfen renk değerini seçiniz
           </option>
           {colorList.map((color) => (
-            <option value={color.toLowerCase()}>{color}</option>
+            <option key={color} value={color.toLowerCase()}>
+              {color}
+            </option>
           ))}
         </Form.Select>
       </Form.Group>

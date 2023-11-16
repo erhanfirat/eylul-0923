@@ -81,7 +81,7 @@ const HomePage = () => {
           e.preventDefault();
         }}
       >
-        <label for="user-mail">
+        <label htmlFor="user-mail">
           Email
           <input
             id="user-mail"
@@ -121,7 +121,7 @@ const HomePage = () => {
         <div>
           Obje Formu
           {MeyveList.map((meyve) => (
-            <label>
+            <label key={meyve}>
               {meyve}
               <input
                 type="checkbox"
@@ -136,7 +136,7 @@ const HomePage = () => {
         <div>
           Array Formu
           {MeyveList.map((meyve) => (
-            <label>
+            <label key={meyve}>
               {meyve}
               <input
                 type="checkbox"

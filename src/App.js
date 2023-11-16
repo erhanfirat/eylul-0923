@@ -85,7 +85,9 @@ function App() {
         }}
       >
         {languages.map((lang) => (
-          <option value={lang.value}>{lang.name}</option>
+          <option value={lang.value} key={lang.value}>
+            {lang.name}
+          </option>
         ))}
       </select>
       <select
