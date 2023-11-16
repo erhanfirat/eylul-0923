@@ -77,12 +77,13 @@ function App() {
       >
         Log User
       </Button>
-      {language} |
+      <span data-testid="lang-value">{language}</span>|
       <select
         value={language}
         onChange={(e) => {
           setLanguage(e.target.value);
         }}
+        data-testid="lang-select"
       >
         {languages.map((lang) => (
           <option value={lang.value} key={lang.value}>

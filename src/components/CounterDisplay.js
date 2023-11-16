@@ -17,15 +17,26 @@ const CounterDisplay = ({
 
   return (
     <Container title={"Yumurta Sepeti " + name}>
-      <h4>Adet: {counter}</h4>
+      <h4>
+        Adet: <span data-testid="counter-value">{counter}</span>
+      </h4>
       <h4>
         Fiyat: <span id="fiyat-span">{fiyat}</span>
       </h4>
-      <Button onClick={sayacArttir} className="me-2" id="yumurta-arttir-btn">
+      <Button
+        onClick={sayacArttir}
+        className="me-2"
+        id="yumurta-arttir-btn"
+        data-testid="yumurta-arttir-btn"
+      >
         <i className="fa-solid fa-plus" />
         Arttır
       </Button>
-      <Button onClick={sayacAzalt} className="me-2">
+      <Button
+        onClick={sayacAzalt}
+        className="me-2"
+        data-testid="azalt-btn"
+      >
         <i className="fa-solid fa-minus" />
         Azalt
       </Button>
