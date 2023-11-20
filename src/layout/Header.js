@@ -16,6 +16,9 @@ const Header = () => {
           <NavLink className="nav-link" to="/products">
             Ürünler
           </NavLink>
+          <NavLink className="nav-link" to="/students">
+            Öğrenciler
+          </NavLink>
           <NavLink
             id="yeni-urun-link"
             className="nav-link"

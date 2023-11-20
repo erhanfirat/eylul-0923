@@ -1,34 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 
 import CounterDisplay from "./CounterDisplay";
 
-let adet2 = 0;
+// const action = {
+//   type: "", // action tipi
+//   payload: "", // herhangi bir data
+// };
+
+const adetReducer = (state, action) => {
+  if (action.type === "arttir") {
+    return state + 1;
+  } else if (action.type === "azalt") {
+    return state - 1 >= 0 ? state - 1 : state;
+  } else if (action.type === "sifirla") {
+    return 0;
+  } else if (action.type === "yuz-verdim") {
+    return 100;
+  } else {
+    return state;
+  }
+};
 
 const Counter = ({ start = 0, name = "" }) => {
-  const [adet, setAdet] = useState(start);
+  const [adet, dispatchAdet] = useReducer(adetReducer, start);
+
   const [taneFiyat, setTaneFiyat] = useState(15);
   const [toplamFiyat, setToplamFiyat] = useState(start * taneFiyat);
   const [boyut, setBoyut] = useState("sm"); // sm, md, lg
 
   const sayacArttir = () => {
-    setAdet(adet + 1);
-    console.log("sayacArttir > adet: ", adet);
+    dispatchAdet({ type: "arttir" });
   };
 
   const sayacAzalt = () => {
-    setAdet(adet - 1);
-    adet2--;
+    dispatchAdet({ type: "azalt" });
   };
 
   const sifirla = () => {
-    setAdet(0);
-    adet2 = 0;
+    dispatchAdet({ type: "sifirla" });
   };
 
   const yuzVerdim = () => {
-    setAdet(100);
-    adet2 = 100;
+    dispatchAdet({ type: "yuz-verdim" });
   };
 
   useEffect(() => {
@@ -75,7 +89,6 @@ const Counter = ({ start = 0, name = "" }) => {
 
   return (
     <>
-      <h3>Adet2: {adet2}</h3>
       <Form.Group
         as={Row}
         className="mb-3"
