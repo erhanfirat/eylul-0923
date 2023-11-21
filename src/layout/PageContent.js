@@ -9,6 +9,8 @@ import EditProductPage from "../pages/EditProductPage";
 import SiparisPage from "../pages/SiparisPage";
 import LoginPage from "../pages/LoginPage";
 import StudentsPage from "../pages/StudentsPage";
+import ProductsReduxPage from "../pages/ProductsReduxPage";
+import UserPage from "../pages/UserPage";
 
 const PageContent = ({ productList, fetchProducts, setSiparisFormData }) => {
   return (
@@ -25,8 +27,14 @@ const PageContent = ({ productList, fetchProducts, setSiparisFormData }) => {
         <Route path="/products" exact>
           <ProductsPage productList={productList} />
         </Route>
+        <Route path="/products-redux" exact>
+          <ProductsReduxPage productList={productList} />
+        </Route>
         <Route path="/products/:productId/:productName" exact>
           <ProductDetail productList={productList} />
+        </Route>
+        <Route path="/my-account" exact>
+          <UserPage />
         </Route>
         <Route path="/edit-product/:productId" exact>
           <EditProductPage

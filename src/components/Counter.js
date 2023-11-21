@@ -55,6 +55,10 @@ const Counter = ({ start = 0, name = "" }) => {
     }
   }, [adet, taneFiyat, boyut]);
 
+  // useEffect(() => {
+  //   setTaneFiyat(taneFiyat);
+  // }, [taneFiyat]);
+
   // component load - componentDidMount
   useEffect(() => {
     console.log(

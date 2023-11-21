@@ -1,7 +1,11 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
+  const productReduxTitle = useSelector((store) => store.product.title);
+  const productTotal = useSelector((store) => store.product.total);
+
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container fluid>
@@ -15,6 +19,9 @@ const Header = () => {
           </NavLink>
           <NavLink className="nav-link" to="/products">
             Ürünler
+          </NavLink>
+          <NavLink className="nav-link" to="/products-redux">
+            {productReduxTitle} [{productTotal}]
           </NavLink>
           <NavLink className="nav-link" to="/students">
             Öğrenciler
@@ -32,6 +39,9 @@ const Header = () => {
           </NavLink>
           <NavLink className="nav-link" to="/login">
             Giriş
+          </NavLink>
+          <NavLink className="nav-link" to="/my-account">
+            Sayfam
           </NavLink>
         </Nav>
       </Container>

@@ -1,14 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 
 const studentReducer = (state, action) => {
-  // if (action.type === "add_student") {
-  //   return [...state, action.payload];
-  // } else if (action.type === "delete_student") {
-  //   return state.filter((s) => s.id !== action.payload);
-  // } else {
-  //   return state;
-  // }
-
   switch (action.type) {
     case "add_student":
       return [...state, action.payload];

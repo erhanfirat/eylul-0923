@@ -11,6 +11,8 @@ import "./App.css";
 import Main from "./layout/Main";
 import { Button } from "react-bootstrap";
 import useLocalStorage from "./hooks/useLocalStorage";
+import { useDispatch } from "react-redux";
+import { setProductsAction } from "./store/reducers/productReducer";
 
 const languages = [
   { name: "Türkçe", value: "tr" },
@@ -38,8 +40,9 @@ function App() {
     themeInitial ? themeInitial : "light"
   );
   const [productList, setProductList] = useState();
-
   const [language, setLanguage] = useLocalStorage("language", initialLanguage);
+
+  const dispatch = useDispatch();
 
   const toggleCounter = () => {
     setShowCounter(!showCounter);
@@ -50,6 +53,9 @@ function App() {
       .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
       .then((res) => {
         setProductList(res.data);
+
+        // todo: ürün listesini redux store a yaz
+        dispatch(setProductsAction(res.data));
         return res.data;
       });
   };
