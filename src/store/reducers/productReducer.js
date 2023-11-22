@@ -3,6 +3,11 @@ export const setProductsAction = (productList) => ({
   payload: productList,
 });
 
+export const deleteProductAction = (productId) => ({
+  type: "DELETE_PRODUCT",
+  payload: productId
+});
+
 export const productReducer = (
   state = {
     title: "Ürünler Redux",
@@ -19,6 +24,14 @@ export const productReducer = (
     case "SET_TITLE":
       return { ...state, title: action.payload };
       break;
+
+    case "DELETE_PRODUCT":
+      const newList = state.list.filter((p) => p.id !== action.payload);
+      return {
+        ...state,
+        list: newList,
+        total: newList.length,
+      };
 
     default:
       return state;

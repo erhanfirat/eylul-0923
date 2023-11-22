@@ -1,12 +1,17 @@
 import { useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
 import useInput from "../hooks/useInput";
+import { useEffect } from "react";
 
 const ProductsReduxPage = () => {
   const [filterText, filterChangeHandler] = useInput();
 
   const productTitle = useSelector((store) => store.product.title);
   const { total, list } = useSelector((store) => store.product);
+
+  useEffect(() => {
+    console.warn("ÜRÜN SAYISINDA DEĞİŞİKLİK TESPİT ETTİK!");
+  }, [total]);
 
   return (
     <div>

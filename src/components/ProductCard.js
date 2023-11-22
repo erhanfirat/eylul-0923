@@ -1,6 +1,10 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteProductAction } from "../store/reducers/productReducer";
 
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <img src={product.img} />
@@ -20,6 +24,17 @@ const ProductCard = ({ product }) => {
         <i className="fa-solid fa-pen me-2" />
         Düzenle
       </Link>
+      <button
+        className="btn btn-danger"
+        onClick={() => {
+          console.time();
+          dispatch(deleteProductAction(product.id));
+          console.timeEnd();
+        }}
+      >
+        <i className="fa-solid fa-trash me-2" />
+        Sil
+      </button>
     </div>
   );
 };
