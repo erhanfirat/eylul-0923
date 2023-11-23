@@ -1,18 +1,16 @@
 // External JS
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Flip, ToastContainer, toast } from "react-toastify";
+import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 
 // Internal JS
+import Main from "./layout/Main";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 // CSS
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Main from "./layout/Main";
-import { Button } from "react-bootstrap";
-import useLocalStorage from "./hooks/useLocalStorage";
-import { useDispatch } from "react-redux";
-import { setProductsAction } from "./store/reducers/productReducer";
 
 const languages = [
   { name: "Türkçe", value: "tr" },
@@ -48,23 +46,10 @@ function App() {
     setShowCounter(!showCounter);
   };
 
-  const fetchProducts = () => {
-    return axios
-      .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
-      .then((res) => {
-        setProductList(res.data);
-
-        // todo: ürün listesini redux store a yaz
-        dispatch(setProductsAction(res.data));
-        return res.data;
-      });
-  };
-
   // component did mount
   // app loaded
   useEffect(() => {
     toast.success("Uygulama başarıyla yüklendi!");
-    fetchProducts();
   }, []);
 
   return (
@@ -106,7 +91,7 @@ function App() {
         <option value={"dark"}>{"Dark"}</option>
         <option value={"light"}>{"Light"}</option>
       </select>
-      <Main productList={productList} fetchProducts={fetchProducts} />;
+      <Main productList={productList} />;
       <ToastContainer
         position="bottom-center"
         theme="colored"

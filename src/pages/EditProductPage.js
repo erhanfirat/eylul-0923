@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import ProductForm from "../components/ProductForm";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductActionCreator } from "../store/actions/productActions";
 
-const EditProductPage = ({ productList, fetchProducts }) => {
-  const [product, setProduct] = useState({});
+const EditProductPage = () => {
+  const { product } = useSelector((store) => store.product);
   const { productId } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const pro = productList?.find((pro) => pro.id == productId);
-    setProduct(pro);
-  }, [productList, productId]);
+    dispatch(fetchProductActionCreator(productId));
+  }, [productId]);
 
   return (
     <div>
@@ -25,7 +27,7 @@ const EditProductPage = ({ productList, fetchProducts }) => {
         Edit: {productId} - {product?.name}
       </h1>
       <hr />
-      <ProductForm productData={product} fetchProducts={fetchProducts} />
+      <ProductForm productData={product} />
     </div>
   );
 };

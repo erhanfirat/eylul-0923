@@ -1,18 +1,12 @@
-export const setProductsAction = (productList) => ({
-  type: "SET_PRODUCTS",
-  payload: productList,
-});
-
-export const deleteProductAction = (productId) => ({
-  type: "DELETE_PRODUCT",
-  payload: productId
-});
+import { FETCH_STATES } from "../actions/productActions";
 
 export const productReducer = (
   state = {
     title: "Ürünler Redux",
     list: [],
+    product: {},
     total: 0,
+    fetchState: FETCH_STATES.notFethed,
   },
   action
 ) => {
@@ -25,6 +19,10 @@ export const productReducer = (
       return { ...state, title: action.payload };
       break;
 
+    case "SET_PRODUCT":
+      return { ...state, product: action.payload };
+      break;
+
     case "DELETE_PRODUCT":
       const newList = state.list.filter((p) => p.id !== action.payload);
       return {
@@ -32,6 +30,9 @@ export const productReducer = (
         list: newList,
         total: newList.length,
       };
+
+    case "SET_PRODUCT_FETCH_STATE":
+      return { ...state, fetchState: action.payload };
 
     default:
       return state;

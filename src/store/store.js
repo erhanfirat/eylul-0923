@@ -8,6 +8,7 @@ import { studentReducer } from "./reducers/studentReducer";
 import { userReducer } from "./reducers/userReducer";
 import { logger } from "./midleware/logger";
 import { yetkiKontrolu } from "./midleware/yetkiKontrolu";
+import thunk from "redux-thunk";
 
 export const reducers = combineReducers({
   product: productReducer,
@@ -17,5 +18,5 @@ export const reducers = combineReducers({
 
 export const store = createStore(
   reducers,
-  applyMiddleware(logger, yetkiKontrolu)
+  applyMiddleware(logger, yetkiKontrolu, thunk)
 );

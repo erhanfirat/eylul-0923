@@ -1,17 +1,27 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
 import useInput from "../hooks/useInput";
 import { useEffect } from "react";
+import {
+  FETCH_STATES,
+  fetchProductsActionCreator,
+} from "../store/actions/productActions";
 
 const ProductsReduxPage = () => {
   const [filterText, filterChangeHandler] = useInput();
 
   const productTitle = useSelector((store) => store.product.title);
-  const { total, list } = useSelector((store) => store.product);
+  const { total, list, fetchState } = useSelector((store) => store.product);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.warn("ÜRÜN SAYISINDA DEĞİŞİKLİK TESPİT ETTİK!");
   }, [total]);
+
+  useEffect(() => {
+    fetchState === FETCH_STATES.notFethed &&
+      dispatch(fetchProductsActionCreator());
+  }, []);
 
   return (
     <div>

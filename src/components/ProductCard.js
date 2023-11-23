@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteProductAction } from "../store/reducers/productReducer";
+import {
+  deleteProductAction,
+  deleteProductActionCreator,
+} from "../store/actions/productActions";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -28,7 +31,7 @@ const ProductCard = ({ product }) => {
         className="btn btn-danger"
         onClick={() => {
           console.time();
-          dispatch(deleteProductAction(product.id));
+          dispatch(deleteProductActionCreator(product.id));
           console.timeEnd();
         }}
       >

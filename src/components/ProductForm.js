@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { fetchProductsActionCreator } from "../store/actions/productActions";
 
 const productEmpty = {
   name: "",
@@ -312,7 +314,7 @@ const colorList = [
   "#9ACD32",
 ].filter((color, i) => !(i % 2));
 
-const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
+const ProductForm = ({ productData = productEmpty }) => {
   const [product, setProduct] = useState(productData);
   const [formErrors, setFormErrors] = useState({
     name: "",
@@ -325,6 +327,7 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
   const [formValid, setFormValid] = useState(true);
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const productFormSchema = Yup.object().shape({
     name: Yup.string()
@@ -337,6 +340,9 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
     price: Yup.number().positive("Fiyat bilgisi eksi değer alamaz."),
     active: Yup.boolean(),
     color: Yup.string().required("Lütfen renk seçiniz."),
+    createdAt: Yup.string(),
+    id: Yup.string(),
+    stock: Yup.number(),
   });
 
   const formSubmit = (e) => {
@@ -362,11 +368,7 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
       axios[reqType](endpoint, product)
         .then((res) => {
           console.log("ürün başarıyla kaydedildi!");
-          fetchProducts().then(() => {
-            // fetch products bitti
-            history.push("/products");
-          });
-          // todo: redirect to products page
+          dispatch(fetchProductsActionCreator());
         })
         .catch((err) => {
           console.error("Ürün kaydedilirken bir hata ile karşılaşıldı: ", err);
@@ -430,7 +432,6 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
           value={product.name}
           name="name"
           isInvalid={!!formErrors.name}
-          
         />
         <Form.Control.Feedback id="name-validation" type="invalid">
           {formErrors.name}
