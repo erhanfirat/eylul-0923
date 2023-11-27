@@ -6,12 +6,21 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { CounterContextProvider } from "./context/CounterContext";
+import StudentContextProvider from "./context/StudentContext";
+import GlobalContextProvider from "./context/GlobalContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CounterContextProvider>
+      <StudentContextProvider>
+        <GlobalContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </GlobalContextProvider>
+      </StudentContextProvider>
+    </CounterContextProvider>
   </Provider>
 );

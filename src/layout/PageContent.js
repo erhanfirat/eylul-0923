@@ -11,6 +11,7 @@ import LoginPage from "../pages/LoginPage";
 import StudentsPage from "../pages/StudentsPage";
 import ProductsReduxPage from "../pages/ProductsReduxPage";
 import UserPage from "../pages/UserPage";
+import StudentsWithCA from "../pages/StudentsWithCA";
 
 const PageContent = ({ productList, fetchProducts, setSiparisFormData }) => {
   return (
@@ -48,7 +49,7 @@ const PageContent = ({ productList, fetchProducts, setSiparisFormData }) => {
         </Route>
 
         <Route path="/students" exact>
-          <StudentsPage />
+          <StudentsWithCA />
         </Route>
 
         <Route path="/login" exact>
