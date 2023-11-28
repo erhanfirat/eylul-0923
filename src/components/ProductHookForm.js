@@ -1,10 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { AxiosInstance } from "../api/api";
 
 const productEmpty = {
   name: "",
@@ -331,11 +331,7 @@ const ProductHookForm = ({ fetchProducts, productData = productEmpty }) => {
     console.log("formData > ", formData);
     // axios req here
 
-    axios
-      .post(
-        "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products ",
-        formData
-      )
+    AxiosInstance.post("/products ", formData)
       .then((res) => {
         console.log("Ürün başarıyla kaydedildi: ", res.data);
         toast.success("Ürün başarıyla kaydedildi!");

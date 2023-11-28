@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -321,11 +320,9 @@ const ProductForm = ({ fetchProducts, productData = productEmpty }) => {
 
     //todo: eğer yeni ürünse post, güncelleme ise put req yap
     const reqType = product.id ? "put" : "post";
-    const endpoint = `https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products${
-      reqType === "put" ? "/" + product.id : ""
-    }`;
+    const endpoint = `/products${reqType === "put" ? "/" + product.id : ""}`;
 
-    axios[reqType](endpoint, product)
+    AxiosInstance[reqType](endpoint, product)
       .then((res) => {
         console.log("ürün başarıyla kaydedildi!");
         fetchProducts().then(() => {

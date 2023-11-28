@@ -1,4 +1,4 @@
-import axios from "axios";
+import { AxiosInstance } from "../../api/api";
 
 export const FETCH_STATES = {
   notFethed: "NOT_FETCHED",
@@ -27,8 +27,7 @@ export const fetchProductsActionCreator = () => {
   // thunk function
   return (dispatch, getState) => {
     dispatch(setProductFetchState(FETCH_STATES.fetching));
-    axios
-      .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
+    AxiosInstance.get("/products")
       .then((res) => {
         dispatch(setProductsAction(res.data));
         dispatch(setProductFetchState(FETCH_STATES.fethced));
@@ -43,16 +42,12 @@ export const fetchProductsActionCreator = () => {
 export const fetchProductActionCreator = (productId) => {
   // thunk function
   return (dispatch, getState) => {
-    axios
-      .get(
-        "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products/" + productId
-      )
-      .then((res) => {
-        dispatch({
-          type: "SET_PRODUCT",
-          payload: res.data,
-        });
+    AxiosInstance.get("/products/" + productId).then((res) => {
+      dispatch({
+        type: "SET_PRODUCT",
+        payload: res.data,
       });
+    });
   };
 };
 
@@ -60,12 +55,8 @@ export const fetchProductActionCreator = (productId) => {
 export const deleteProductActionCreator = (productId) => {
   // thunk function
   return (dispatch, getState) => {
-    axios
-      .delete(
-        "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products/" + productId
-      )
-      .then((res) => {
-        dispatch(deleteProductAction(productId));
-      });
+    AxiosInstance.delete("/products/" + productId).then((res) => {
+      dispatch(deleteProductAction(productId));
+    });
   };
 };

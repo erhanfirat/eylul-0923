@@ -11,6 +11,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 // CSS
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { AxiosInstance, renewAxiosInstance } from "./api/api";
 
 const languages = [
   { name: "Türkçe", value: "tr" },
@@ -50,6 +51,36 @@ function App() {
   // app loaded
   useEffect(() => {
     toast.success("Uygulama başarıyla yüklendi!");
+
+    // todo: localStorage kontrol et token var mı?
+    const token = localStorage.getItem("token");
+
+    // token varsa, backend e request atarak kontrol edicek
+
+    if (token) {
+      // backend e istek gönder
+
+      AxiosInstance.get("https://reqres.in/api/users/1")
+        .then((res) => {
+          console.log("token verify res > ", res);
+          // login oldu
+          const user = res.data.data;
+          dispatch({
+            type: "SET_USER_NAME",
+            payload: user.first_name,
+          });
+          dispatch({
+            type: "SET_USER_EMAIL",
+            payload: user.email,
+          });
+        })
+        .catch((err) => {
+          console.log("token verify err > ", err);
+          // token geçersiz
+          localStorage.removeItem("token");
+          renewAxiosInstance();
+        });
+    }
   }, []);
 
   return (

@@ -53,6 +53,10 @@ const HomePage = () => {
     console.log("meyveler güncellendi: ", meyveler);
   }, [meyveler]);
 
+  useEffect(() => {
+    console.log("Ana sayfa did mount!");
+  }, []);
+
   return (
     <div>
       <h1>Ana Sayfa</h1>
