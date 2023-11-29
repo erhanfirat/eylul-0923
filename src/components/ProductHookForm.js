@@ -331,7 +331,7 @@ const ProductHookForm = ({ fetchProducts, productData = productEmpty }) => {
     console.log("formData > ", formData);
     // axios req here
 
-    AxiosInstance.post("/products ", formData)
+    AxiosInstance.post("/products", formData)
       .then((res) => {
         console.log("Ürün başarıyla kaydedildi: ", res.data);
         toast.success("Ürün başarıyla kaydedildi!");

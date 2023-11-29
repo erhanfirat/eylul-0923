@@ -1,7 +1,7 @@
 // External JS
 import { useEffect, useState } from "react";
 import { Flip, ToastContainer, toast } from "react-toastify";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
 // Internal JS
@@ -12,6 +12,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { AxiosInstance, renewAxiosInstance } from "./api/api";
+import { REQ_TYPES, useAxios } from "./hooks/useAxios";
 
 const languages = [
   { name: "Türkçe", value: "tr" },
@@ -41,6 +42,16 @@ function App() {
   const [productList, setProductList] = useState();
   const [language, setLanguage] = useLocalStorage("language", initialLanguage);
 
+  const [products, getProducts, productsLoading] = useAxios({
+    endpoint: "/products",
+    reqType: REQ_TYPES.GET,
+    config: {
+      headers: {
+        "Custom-Header": "blabla",
+      },
+    },
+  });
+
   const dispatch = useDispatch();
 
   const toggleCounter = () => {
@@ -50,6 +61,7 @@ function App() {
   // component did mount
   // app loaded
   useEffect(() => {
+    getProducts();
     toast.success("Uygulama başarıyla yüklendi!");
 
     // todo: localStorage kontrol et token var mı?
@@ -83,45 +95,17 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log("Products datası güncellendi: ", products);
+  }, [products]);
+
   return (
     <>
-      <Button
-        onClick={() => {
-          setUser({ name: "ali", email: "ali@ali.com" });
-        }}
-      >
-        Set User
-      </Button>
-      <Button
-        onClick={() => {
-          console.log("user > ", user);
-        }}
-      >
-        Log User
-      </Button>
-      <span data-testid="lang-value">{language}</span>|
-      <select
-        value={language}
-        onChange={(e) => {
-          setLanguage(e.target.value);
-        }}
-        data-testid="lang-select"
-      >
-        {languages.map((lang) => (
-          <option value={lang.value} key={lang.value}>
-            {lang.name}
-          </option>
-        ))}
-      </select>
-      <select
-        value={theme}
-        onChange={(e) => {
-          setTheme(e.target.value);
-        }}
-      >
-        <option value={"dark"}>{"Dark"}</option>
-        <option value={"light"}>{"Light"}</option>
-      </select>
+      {productsLoading && (
+        <p>
+          <Spinner /> Ürün dataları yükleniyor...
+        </p>
+      )}
       <Main productList={productList} />;
       <ToastContainer
         position="bottom-center"

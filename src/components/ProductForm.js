@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { fetchProductsActionCreator } from "../store/actions/productActions";
 import { AxiosInstance } from "../api/api";
+import { REQ_TYPES, useAxios } from "../hooks/useAxios";
 
 const productEmpty = {
   name: "",
@@ -325,6 +326,11 @@ const ProductForm = ({ productData = productEmpty }) => {
     color: "",
   });
   const [formValid, setFormValid] = useState(true);
+  const [saveProductResponse, saveProduct, saveLoading] = useAxios({
+    reqType: product.id ? REQ_TYPES.PUT : REQ_TYPES.POST,
+    endpoint: `/products${productData.id ? "/" + productData.id : ""}`,
+    payload: product,
+  });
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -360,17 +366,19 @@ const ProductForm = ({ productData = productEmpty }) => {
       console.log("FROM SUBMIT EDİLDİ! ", e);
 
       //todo: eğer yeni ürünse post, güncelleme ise put req yap
-      const reqType = product.id ? "put" : "post";
-      const endpoint = `/products${reqType === "put" ? "/" + product.id : ""}`;
+      // const reqType = product.id ? "put" : "post";
+      // const endpoint = `/products${reqType === "put" ? "/" + product.id : ""}`;
 
-      AxiosInstance[reqType](endpoint, product)
-        .then((res) => {
-          console.log("ürün başarıyla kaydedildi!");
-          dispatch(fetchProductsActionCreator());
-        })
-        .catch((err) => {
-          console.error("Ürün kaydedilirken bir hata ile karşılaşıldı: ", err);
-        });
+      // AxiosInstance[reqType](endpoint, product)
+      //   .then((res) => {
+      //     console.log("ürün başarıyla kaydedildi!");
+      //     dispatch(fetchProductsActionCreator());
+      //   })
+      //   .catch((err) => {
+      //     console.error("Ürün kaydedilirken bir hata ile karşılaşıldı: ", err);
+      //   });
+
+      saveProduct();
     }
   };
 
