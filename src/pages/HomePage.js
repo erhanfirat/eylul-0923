@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { source } from "../sources/sources";
 
 const MeyveList = ["muz", "erik", "elma", "kayısı"];
 
@@ -6,10 +8,8 @@ const HomePage = () => {
   const [email, setEmail] = useState("a@a.com");
   const [password, setPassword] = useState("123");
   const [remember, setRemember] = useState(false);
-
   const [meyveler, setMeyveler] = useState([]);
   // ["muz", "erik"]
-
   const [meyveler2, setMeyveler2] = useState(() => {
     const meyveInitial = {};
     MeyveList.forEach((meyve) => {
@@ -18,6 +18,8 @@ const HomePage = () => {
     console.log("meyveInitial > ", meyveInitial);
     return meyveInitial;
   });
+  const { language } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
   const meyveSelect = (e, meyve) => {
     // seçili
@@ -59,7 +61,13 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Ana Sayfa</h1>
+      <h1>{source[language].homePageHeader}</h1>
+      <button onClick={() => dispatch({ type: "CHANGE_LANG", payload: "en" })}>
+        En
+      </button>
+      <button onClick={() => dispatch({ type: "CHANGE_LANG", payload: "tr" })}>
+        Tr
+      </button>
       <hr />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae omnis

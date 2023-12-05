@@ -11,7 +11,7 @@ const ProductsReduxPage = () => {
   const [filterText, filterChangeHandler] = useInput();
 
   const productTitle = useSelector((store) => store.product.title);
-  const { total, list, fetchState } = useSelector((store) => store.product);
+  const { total, list, fetchState, title } = useSelector((store) => store.product);
   const dispatch = useDispatch();
 
   useEffect(() => {

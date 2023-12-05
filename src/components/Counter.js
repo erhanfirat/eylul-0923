@@ -25,7 +25,7 @@ const adetReducer = (state, action) => {
 const Counter = ({ start = 0, name = "" }) => {
   const [adet, dispatchAdet] = useReducer(adetReducer, start);
 
-  const [taneFiyat, setTaneFiyat] = useState(15);
+  const [taneFiyat, setTaneFiyat] = useState(15); // immutable
   const [toplamFiyat, setToplamFiyat] = useState(start * taneFiyat);
   const [boyut, setBoyut] = useState("sm"); // sm, md, lg
 
@@ -75,6 +75,16 @@ const Counter = ({ start = 0, name = "" }) => {
     };
   }, []);
 
+  const counterProps = {
+    name: name,
+    counter: adet,
+    sayacArttir: sayacArttir,
+    sayacAzalt: sayacAzalt,
+    sifirla: sifirla,
+    yuzVerdim: yuzVerdim,
+    fiyat: toplamFiyat,
+  };
+
   // component update - componentDidUpdate - component rerender
   useEffect(() => {
     console.log(
@@ -121,15 +131,7 @@ const Counter = ({ start = 0, name = "" }) => {
         </Col>
       </Form.Group>
 
-      <CounterDisplay
-        name={name}
-        counter={adet}
-        sayacArttir={sayacArttir}
-        sayacAzalt={sayacAzalt}
-        sifirla={sifirla}
-        yuzVerdim={yuzVerdim}
-        fiyat={toplamFiyat}
-      />
+      <CounterDisplay {...counterProps} />
     </>
   );
 };

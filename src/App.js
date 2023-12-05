@@ -93,6 +93,14 @@ function App() {
           renewAxiosInstance();
         });
     }
+
+    dispatch({
+      type: "SET_TITLE",
+      payload: {
+        title: "Selam",
+        description: "merhaba",
+      },
+    });
   }, []);
 
   useEffect(() => {

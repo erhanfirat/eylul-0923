@@ -42,7 +42,7 @@ export const useAxios = ({
       })
       .catch((error) => {
         // Uygulamanın tüm requestleri için Error Handling mekanizması buraya eklenebilir
-        toast(
+        toast.error(
           `${endpoint} URL ine ${reqType} isteği gönderilirken bir hata ile karşılaşıldı.`
         );
         //hatayiDByeKaydet(err);

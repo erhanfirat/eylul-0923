@@ -6,8 +6,8 @@ const CreateProductPage = () => {
     <div>
       <h1>Create Product</h1>
       <hr />
-      <ProductForm />
-      {/* <ProductHookForm /> */}
+      {/* <ProductForm /> */}
+      <ProductHookForm />
     </div>
   );
 };
